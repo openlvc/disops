@@ -90,6 +90,11 @@
 		<pathelement path="${resources.dir}/testdata"/>
 	</path>
 	
+	<!-- generate the classpath for the manifest -->
+	<manifestclasspath property="disops.manifest.classpath" jarfile="${lib.dir}/disops.jar">
+		<classpath refid="compile.classpath"/>
+	</manifestclasspath>
+
 	<!-- ================================================================================= -->
 	<!--                                   Clean Targets                                   -->
 	<!-- ================================================================================= -->
@@ -183,6 +188,11 @@
 
 		<!-- copy across the dependant libraries -->
 		<mkdir dir="${sandbox.lib.dir}"/>
+		<copy todir="${sandbox.dir}/lib">
+			<fileset dir="${lib.dir}">
+				<include name="log4j/**/*"/>
+			</fileset>
+		</copy>
 
 		<!-- copy across the resources -->
 		<copy todir="${sandbox.dir}">
@@ -227,12 +237,16 @@
 
 			<!-- MANIFEST -->
 			<manifest>
-				<attribute name="Main-Class" value="org.openlvc.disops.Main"/>
-				<attribute name="Built-By" value="Calytrix Technologies"/>
+				<attribute name="Product"          value="Open LVC DisOps"/>
+				<attribute name="Product-Version"  value="${build.version}"/>
+				<attribute name="Built-By"         value="Open LVC Project"/>
+				<attribute name="Built-Date"       value="${TODAY}"/>
+				<attribute name="Main-Class"       value="org.openlvc.disops.Main"/>
+				<attribute name="Class-Path"       value="../ ${disops.manifest.classpath}"/>
 				<section name="org/openlvc/disops">
-					<attribute name="Implementation-Title" value="disops"/>
+					<attribute name="Implementation-Title" value="org.openlvc.disops"/>
 					<attribute name="Implementation-Version" value="${build.version} (build ${build.number}) ${TODAY}"/>
-					<attribute name="Implementation-Vendor" value="Open LVC"/>
+					<attribute name="Implementation-Vendor" value="Open LVC Project"/>
 				</section>
 			</manifest>
 		</jar>

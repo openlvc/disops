@@ -17,7 +17,9 @@
  */
 package org.openlvc.disops.server;
 
+import org.apache.logging.log4j.Logger;
 import org.openlvc.disops.configuration.Configuration;
+import org.openlvc.disops.server.influx.InfluxManager;
 
 public class DisOpsServer
 {
@@ -28,13 +30,18 @@ public class DisOpsServer
 	//----------------------------------------------------------
 	//                   INSTANCE VARIABLES
 	//----------------------------------------------------------
+	private Configuration configuration;
+	private InfluxManager influxManager;
+	private Logger logger;
 
 	//----------------------------------------------------------
 	//                      CONSTRUCTORS
 	//----------------------------------------------------------
 	public DisOpsServer( Configuration configuration )
 	{
-		
+		this.configuration = configuration;
+		this.influxManager = new InfluxManager( configuration );
+		this.logger = this.configuration.getApplicationLogger();
 	}
 
 	//----------------------------------------------------------
@@ -43,7 +50,14 @@ public class DisOpsServer
 
 	public void startup()
 	{
-		
+		this.logger.info( "Starting DisOps Server" );
+		this.influxManager.startup();
+	}
+	
+	public void shutdown()
+	{
+		this.logger.info( "Shutting down DisOps Server" );
+		this.influxManager.shutdown();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////

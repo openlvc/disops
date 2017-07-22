@@ -45,6 +45,8 @@ public class Main
 		// Run the load master
 		DisOpsServer server = new DisOpsServer( configuration );
 		server.startup();
+		
+		Thread.sleep( 2000 );
 	}
 
 	//----------------------------------------------------------

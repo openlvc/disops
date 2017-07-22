@@ -1,0 +1,8 @@
+-------------------------------
+InfluxDB / TICK Stack Versions
+-------------------------------
+   Influx DB: 1.3.1-1
+   Kapacitor: 1.3.1-1
+    Telegraf: 1.3.4
+ Chronograph: 1.3.4.0-1
+

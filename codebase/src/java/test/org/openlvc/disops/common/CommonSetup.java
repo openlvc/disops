@@ -1,22 +1,23 @@
 /*
- *   Copyright 2013 MYPROJECT-VENDOR
+ *   Copyright 2015 Open LVC Project.
  *
- *   This file is part of MYPROJECT.
- * 
- *   MYPORJECT is free software; you can redistribute and/or modify it under the
- *   terms of the Common Development and Distribution License (the "License").
- *   You may not use this file except in compliance with the License.
+ *   This file is part of Open LVC Disco.
  *
- *   Obtain a copy of the License at http://opensource.org/licenses/CDDL-1.0
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- *
- *   This Software is provided "AS IS" and "WITH ALL FAULTS".
- *   Use of this software is strictly AT YOUR OWN RISK!!!
- *
  */
-import java.io.File;
-import org.testng.Assert;
+package org.openlvc.disops.common;
+
+import org.openlvc.disops.configuration.Log4jConfiguration;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -33,8 +34,15 @@ public class CommonSetup
 	public static final String TEST_ROOT_DIR = System.getProperty( "test.root.dir" );
 
 	// System properties that will control the log level used for testing
-	private static final String TEST_LOG_LEVEL = System.getProperty( "test.loglevel", "OFF" );	
-	private static final String FILE_LOG_LEVEL = System.getProperty( "test.fileLogLevel","no" );
+	//private static final String TEST_LOG_LEVEL = System.getProperty( "test.loglevel", "OFF" );	
+	//private static final String FILE_LOG_LEVEL = System.getProperty( "test.fileLogLevel","no" );
+	
+	// set during commonBeforeSuiteSetup()
+	public static String CONSOLE_LOG_LEVEL = "OFF";
+	
+	// set during commonBeforeSuiteSetup()
+	public static long TIMEOUT = 1000;
+
 
 	//----------------------------------------------------------
 	//                   INSTANCE VARIABLES
@@ -58,18 +66,16 @@ public class CommonSetup
 		// set the global log level based off the level provided on the command line //
 		///////////////////////////////////////////////////////////////////////////////
 		// set the log level if it has been specified in the system properties
-		String loglevel = System.getProperty( "test.loglevel", "OFF" );
-		if( loglevel.equals("${test.loglevel}") )
-				loglevel = "OFF";
+		CONSOLE_LOG_LEVEL = System.getProperty( "test.loglevel", "OFF" );
+		if( CONSOLE_LOG_LEVEL.equals("${test.loglevel}") )
+			CONSOLE_LOG_LEVEL = "OFF";
 		
-		// set the global log level based off the given level above
-		// FIXME Adjust our log level to match the one defined for the test
-		//System.setProperty( PorticoConstants.PROPERTY_PORTICO_LOG_LEVEL, loglevel );
+		Log4jConfiguration logConfiguration = new Log4jConfiguration( "disops" );
+		logConfiguration.activateConfiguration();
 
 		/////////////////////////////////////////
 		// project specific pre-test run setup //
 		/////////////////////////////////////////
-		// FIXME		
 	}
 
 	@AfterSuite(alwaysRun=true)
@@ -81,19 +87,11 @@ public class CommonSetup
 	/**
 	 * If file-based logging is turned on, this method will redirect output for
 	 * each individual test into a separate log file so that you can easily locate
-	 * the logging caused by one test method even if you have run multiples.
+	 * tfhe logging caused by one test method even if you have run multiples.
 	 */
 	public static void testStarting( String className, String methodName )
 	{
-		// FIXME Enable this if you want to use it
-
-//		// don't set things up unless per-test log files are enabled
-//		if( FILE_LOG_LEVEL.equals("${test.fileLogLevel}") || FILE_LOG_LEVEL.equals("no") )
-//			return;
-//
-//		String testSuite = System.getProperty( "test.suite", "unknownSuite" );
-//		String filename = "logs/"+testSuite+"/"+className+"/"+methodName+".log";
-//		Log4jConfigurator.redirectFileOutput( filename, false );
 	}
+	
 }
 

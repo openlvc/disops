@@ -1,20 +1,21 @@
 /*
- *   Copyright 2013 MYPROJECT-VENDOR
+ *   Copyright 2017 Open LVC Project.
  *
- *   This file is part of MYPROJECT.
- * 
- *   MYPORJECT is free software; you can redistribute and/or modify it under the
- *   terms of the Common Development and Distribution License (the "License").
- *   You may not use this file except in compliance with the License.
+ *   This file is part of Open LVC DisOps.
  *
- *   Obtain a copy of the License at http://opensource.org/licenses/CDDL-1.0
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- *
- *   This Software is provided "AS IS" and "WITH ALL FAULTS".
- *   Use of this software is strictly AT YOUR OWN RISK!!!
- *
  */
+import org.openlvc.disops.common.CommonSetup;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -58,7 +59,7 @@ public class SimpleTestLogger implements ITestListener
 	public void onTestStart( ITestResult result )
 	{
 		String className = result.getTestClass().getRealClass().getSimpleName();
-		String methodName = result.getMethod().getMethod().getName();
+		String methodName = result.getMethod().getMethodName();
 		CommonSetup.testStarting( className, methodName );
 	}
 

@@ -210,7 +210,7 @@
 
 	<!-- EXAMPLE: Remember to adjust for Disops or remove entirely -->
 	<!-- build the main disops jar file -->
-	<target name="jar.disops" extensionOf="jars" depends="compile,onejar">
+	<target name="jar.disops" extensionOf="jars" depends="compile">
 		<!-- construct the main portico jar file -->
 		<jar destfile="${sandbox.dir}/lib/disops.jar">
 			<!-- portico code -->

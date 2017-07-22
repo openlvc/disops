@@ -51,7 +51,7 @@ public class CommonSetup
 	//----------------------------------------------------------
 	//                     STATIC METHODS
 	//----------------------------------------------------------
-	@BeforeSuite(alwaysRun="true")
+	@BeforeSuite(alwaysRun=true)
 	public static void commonBeforeSuiteSetup()
 	{
 		///////////////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ public class CommonSetup
 		// FIXME		
 	}
 
-	@AfterSuite(alwaysRun="true")
+	@AfterSuite(alwaysRun=true)
 	public static void commonAfterSuiteCleanup()
 	{
 

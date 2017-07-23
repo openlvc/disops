@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="codebase/resources/dist/common"/>
 	<classpathentry kind="lib" path="codebase/lib/log4j/apache-log4j-2.4.1/log4j-api-2.4.1.jar"/>
 	<classpathentry kind="lib" path="codebase/lib/log4j/apache-log4j-2.4.1/log4j-core-2.4.1.jar"/>
+	<classpathentry kind="lib" path="codebase/lib/influxdb-java/2.7/influxdb-java-2.7.jar"/>
 	<classpathentry kind="output" path="eclipse-build/classes"/>
 </classpath>

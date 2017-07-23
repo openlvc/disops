@@ -64,6 +64,12 @@
 	     when defining paths and the like later in the build file -->
 	<property name="testng.dir"            location="${lib.dir}/testng/testng-6.8"/>
 	<property name="log4j.dir"             location="${lib.dir}/log4j/apache-log4j-2.4.1"/>
+	<property name="influxdb-java.dir"     location="${lib.dir}/influxdb-java/2.7"/>
+	<!-- influxdb-java deps -->
+	<property name="okhttp.dir"            location="${lib.dir}/okhttp/3.8.1"/>
+	<property name="okio.dir"              location="${lib.dir}/okio/1.13.0"/>
+	<property name="retrofit.dir"          location="${lib.dir}/retrofit/2.3.0"/>
+	<property name="moshi.dir"             location="${lib.dir}/moshi/1.5.0"/>
 
 	<!-- Classpaths for individual libraries -->
 	<path id="lib.testng.classpath">
@@ -74,11 +80,20 @@
 		<fileset dir="${log4j.dir}" includes="**/*"/>
 	</path>
 
+	<path id="lib.influxdb-java.classpath">
+		<fileset dir="${influxdb-java.dir}" includes="**/*"/>
+		<fileset dir="${okhttp.dir}"        includes="**/*"/>
+		<fileset dir="${okio.dir}"          includes="**/*"/>
+		<fileset dir="${retrofit.dir}"      includes="**/*"/>
+		<fileset dir="${moshi.dir}"         includes="**/*"/>
+	</path>
+
 	<!-- ========================== -->
 	<!-- Classpath Set Declarations -->
 	<!-- ========================== -->
 	<path id="compile.classpath">
 		<path refid="lib.log4j.classpath"/>
+		<path refid="lib.influxdb-java.classpath"/>
 	</path>
 	
 	<path id="test.classpath">
@@ -191,6 +206,11 @@
 		<copy todir="${sandbox.dir}/lib">
 			<fileset dir="${lib.dir}">
 				<include name="log4j/**/*"/>
+				<include name="influxdb-java/**/*"/>
+				<include name="okhttp/**/*"/>
+				<include name="okio/**/*"/>
+				<include name="retrofit/**/*"/>
+				<include name="moshi/**/*"/>
 			</fileset>
 		</copy>
 

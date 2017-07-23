@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.Logger;
+import org.influxdb.InfluxDB;
+import org.influxdb.InfluxDBFactory;
 import org.openlvc.disops.DisOpsException;
 import org.openlvc.disops.configuration.Configuration;
 import org.openlvc.disops.configuration.InfluxConfiguration;
@@ -93,6 +95,8 @@ public class InfluxManager
 		builder.redirectOutput( new File("eldumpo.txt") );
 		logger.info( builder.command() );
 		
+		testConnection();
+		
 		try
 		{
 			this.processInfluxd = builder.start();
@@ -112,6 +116,15 @@ public class InfluxManager
 			this.processInfluxd.destroy();
 	}
 	
+	
+	
+	private void testConnection()
+	{
+		logger.error( "(A)" );
+		InfluxDB influxDB = InfluxDBFactory.connect("http://localhost:8086", "root", "root");
+		influxDB.createDatabase( "test" );
+		logger.error( "(B)" );
+	}
 	
 	//----------------------------------------------------------
 	//                     STATIC METHODS
